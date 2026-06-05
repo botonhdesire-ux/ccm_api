@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Historique — CCM Analyser | API-BENIN</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+<div class="app-wrapper">
+
+  <!-- ══ SIDEBAR ══════════════════════════════════════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="index.html" class="logo-mark">
+        <div class="logo-icon">🔬</div>
+        <div>
+          <div class="logo-text">CCM Analyser</div>
+          <div class="logo-sub">API-BENIN</div>
+        </div>
+      </a>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-section-label">Principal</span>
+      <a href="index.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M2 10a8 8 0 1116 0A8 8 0 012 10zm8-3a1 1 0 100 2 1 1 0 000-2zm-1 4a1 1 0 011-1h1a1 1 0 110 2v2a1 1 0 11-2 0v-2a1 1 0 01-1-1z"/></svg>
+        Tableau de bord
+      </a>
+      <a href="analyse.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 2a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H4zm0 2h12v12H4V4zm3 3a1 1 0 011-1h4a1 1 0 110 2H8a1 1 0 01-1-1zm0 3a1 1 0 011-1h4a1 1 0 110 2H8a1 1 0 01-1-1zm0 3a1 1 0 011-1h2a1 1 0 110 2H8a1 1 0 01-1-1z"/></svg>
+        Nouvelle analyse
+      </a>
+      <a href="resultats.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
+        Résultats & Rf
+      </a>
+      <span class="nav-section-label">Gestion</span>
+      <a href="historique.html" class="nav-item active">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/></svg>
+        Historique
+      </a>
+      <a href="rapport.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z"/></svg>
+        Rapports & Export
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-status">
+        <div class="status-dot"></div>
+        <div class="status-text">
+          <span class="status-label">Système actif</span>
+          Moteur prêt
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay"></div>
+
+  <!-- ══ MAIN ═════════════════════════════════════════════ -->
+  <main class="main-content">
+
+    <header class="top-header">
+      <button class="menu-toggle" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <nav class="header-breadcrumb">
+        <a href="index.html" style="color:var(--text-muted);text-decoration:none;">API-BENIN</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-current">Historique</span>
+      </nav>
+      <div class="header-spacer"></div>
+      <div class="header-actions">
+        <button class="theme-toggle" onclick="CCM.toggleTheme()" title="Changer de thème" aria-label="Changer de thème">☀️</button>
+        <button class="btn btn-danger btn-sm" id="btn-clear-all">🗑 Vider</button>
+        <div class="header-avatar" title="Opérateur">OP</div>
+      </div>
+    </header>
+
+    <div class="page-content">
+
+      <div class="page-header">
+        <div class="page-header-row">
+          <div>
+            <h1 class="page-title">Historique des <span>analyses</span></h1>
+            <p class="page-subtitle" id="history-count-label">Chargement…</p>
+          </div>
+          <a href="analyse.html" class="btn btn-primary">+ Nouvelle analyse</a>
+        </div>
+      </div>
+
+      <!-- Filters bar -->
+      <div class="card section-sm" style="padding:16px 20px;">
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:200px;position:relative;">
+            <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:14px;">🔍</span>
+            <input type="text" id="search-input" class="form-control" placeholder="Rechercher par ID, échantillon, alcaloïde…"
+              style="padding-left:36px;" />
+          </div>
+          <select id="filter-status" class="form-control" style="width:auto;min-width:160px;">
+            <option value="">Tous les statuts</option>
+            <option value="done">Validé</option>
+            <option value="pending">En attente</option>
+          </select>
+          <select id="sort-by" class="form-control" style="width:auto;min-width:160px;">
+            <option value="date-desc">Plus récent</option>
+            <option value="date-asc">Plus ancien</option>
+            <option value="spots-desc">Plus de spots</option>
+          </select>
+          <button class="btn btn-ghost btn-sm" id="btn-reset-filters">✕ Réinitialiser</button>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="card section">
+        <div class="table-wrap" id="history-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID Analyse</th>
+                <th>Date & Heure</th>
+                <th>Échantillon</th>
+                <th>Phytomédicament</th>
+                <th>Spots</th>
+                <th>Alcaloïdes</th>
+                <th>Statut</th>
+                <th>Exporté</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="history-table-body">
+              <tr><td colspan="9" style="text-align:center;padding:40px;color:var(--text-muted);">Chargement…</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Empty state -->
+        <div id="history-empty" style="display:none;">
+          <div class="empty-state">
+            <div class="empty-icon">🕐</div>
+            <div class="empty-title">Aucune analyse trouvée</div>
+            <div class="empty-subtitle">Aucun résultat ne correspond à vos critères de recherche.</div>
+            <a href="analyse.html" class="btn btn-primary" style="margin-top:8px;">Lancer une analyse</a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /page-content -->
+  </main>
+
+</div><!-- /app-wrapper -->
+
+<script src="js/main.js"></script>
+<script src="js/historique.js"></script>
+</body>
+</html>

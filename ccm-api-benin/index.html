@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — CCM Analyser | API-BENIN</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+<div class="app-wrapper">
+
+  <!-- ══ SIDEBAR ══════════════════════════════════════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="index.html" class="logo-mark">
+        <div class="logo-icon">🔬</div>
+        <div>
+          <div class="logo-text">CCM Analyser</div>
+          <div class="logo-sub">API-BENIN</div>
+        </div>
+      </a>
+    </div>
+
+    <nav class="sidebar-nav">
+      <span class="nav-section-label">Principal</span>
+
+      <a href="index.html" class="nav-item active">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M2 10a8 8 0 1116 0A8 8 0 012 10zm8-3a1 1 0 100 2 1 1 0 000-2zm-1 4a1 1 0 011-1h1a1 1 0 110 2v2a1 1 0 11-2 0v-2a1 1 0 01-1-1z"/>
+        </svg>
+        Tableau de bord
+      </a>
+
+      <a href="analyse.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M4 2a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H4zm0 2h12v12H4V4zm3 3a1 1 0 011-1h4a1 1 0 110 2H8a1 1 0 01-1-1zm0 3a1 1 0 011-1h4a1 1 0 110 2H8a1 1 0 01-1-1zm0 3a1 1 0 011-1h2a1 1 0 110 2H8a1 1 0 01-1-1z"/>
+        </svg>
+        Nouvelle analyse
+      </a>
+
+      <a href="resultats.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
+        </svg>
+        Résultats & Rf
+      </a>
+
+      <span class="nav-section-label">Gestion</span>
+
+      <a href="historique.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/>
+        </svg>
+        Historique
+        <span class="nav-badge" id="nav-badge-history">0</span>
+      </a>
+
+      <a href="rapport.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z"/>
+        </svg>
+        Rapports & Export
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-status">
+        <div class="status-dot"></div>
+        <div class="status-text">
+          <span class="status-label">Système actif</span>
+          Moteur prêt
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay"></div>
+
+  <!-- ══ MAIN ═════════════════════════════════════════════ -->
+  <main class="main-content">
+
+    <!-- Header -->
+    <header class="top-header">
+      <button class="menu-toggle" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <nav class="header-breadcrumb">
+        <span>API-BENIN</span>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-current">Tableau de bord</span>
+      </nav>
+      <div class="header-spacer"></div>
+      <div class="header-actions">
+        <button class="theme-toggle" onclick="CCM.toggleTheme()" title="Changer de thème" aria-label="Changer de thème">☀️</button>
+        <div class="header-chip">
+          🗓 <span id="header-date"></span>
+        </div>
+        <a href="analyse.html" class="btn btn-primary btn-sm">
+          + Nouvelle analyse
+        </a>
+        <div class="header-avatar" title="Opérateur">OP</div>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="page-content">
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <div class="page-header-row">
+          <div>
+            <h1 class="page-title">Tableau de <span>bord</span></h1>
+            <p class="page-subtitle">Vue d'ensemble du laboratoire de contrôle qualité CCM — API-BENIN</p>
+          </div>
+          <a href="analyse.html" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"/>
+            </svg>
+            Lancer une analyse
+          </a>
+        </div>
+      </div>
+
+      <!-- ── Stat Cards ──────────────────────────────────── -->
+      <section class="section">
+        <div class="grid-4">
+          <div class="stat-card blue">
+            <div class="stat-label">Analyses totales</div>
+            <div class="stat-value" data-count="0" id="stat-total">0</div>
+            <div class="stat-trend up">↑ +3 cette semaine</div>
+          </div>
+          <div class="stat-card green">
+            <div class="stat-label">Alcaloïdes identifiés</div>
+            <div class="stat-value" data-count="0" id="stat-spots">0</div>
+            <div class="stat-trend up">↑ Taux de détection élevé</div>
+          </div>
+          <div class="stat-card amber">
+            <div class="stat-label">En attente de validation</div>
+            <div class="stat-value" data-count="0" id="stat-pending">0</div>
+            <div class="stat-trend">À réviser</div>
+          </div>
+          <div class="stat-card violet">
+            <div class="stat-label">Rapports exportés</div>
+            <div class="stat-value" data-count="0" id="stat-reports">0</div>
+            <div class="stat-trend up">↑ Ce mois</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Quick Actions + Recent ──────────────────────── -->
+      <section class="section">
+        <div class="grid-2" style="gap:24px; align-items:start;">
+
+          <!-- Quick actions -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <div class="card-icon" style="background:var(--primary-dim)">⚡</div>
+                Accès rapide
+              </div>
+            </div>
+            <div class="card-body" style="padding:16px;">
+              <div style="display:flex; flex-direction:column; gap:10px;">
+
+                <a href="analyse.html" class="quick-action-btn">
+                  <div class="qa-icon" style="background:rgba(79,179,255,0.12);color:var(--primary)">🔬</div>
+                  <div class="qa-info">
+                    <div class="qa-title">Analyser une plaque CCM</div>
+                    <div class="qa-sub">Importer et traiter une nouvelle image</div>
+                  </div>
+                  <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" style="color:var(--text-muted)">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
+                  </svg>
+                </a>
+
+                <a href="resultats.html" class="quick-action-btn">
+                  <div class="qa-icon" style="background:rgba(63,255,162,0.12);color:var(--accent-green)">📊</div>
+                  <div class="qa-info">
+                    <div class="qa-title">Consulter les résultats</div>
+                    <div class="qa-sub">Valeurs Rf et identifications</div>
+                  </div>
+                  <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" style="color:var(--text-muted)">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
+                  </svg>
+                </a>
+
+                <a href="rapport.html" class="quick-action-btn">
+                  <div class="qa-icon" style="background:rgba(255,184,79,0.12);color:var(--accent-amber)">📄</div>
+                  <div class="qa-info">
+                    <div class="qa-title">Exporter un rapport</div>
+                    <div class="qa-sub">PDF ou CSV des résultats</div>
+                  </div>
+                  <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" style="color:var(--text-muted)">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
+                  </svg>
+                </a>
+
+                <a href="historique.html" class="quick-action-btn">
+                  <div class="qa-icon" style="background:rgba(185,122,255,0.12);color:var(--accent-violet)">🕐</div>
+                  <div class="qa-info">
+                    <div class="qa-title">Voir l'historique</div>
+                    <div class="qa-sub">Toutes les analyses passées</div>
+                  </div>
+                  <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" style="color:var(--text-muted)">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
+                  </svg>
+                </a>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent analyses -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <div class="card-icon" style="background:rgba(63,255,162,0.12)">🕐</div>
+                Analyses récentes
+              </div>
+              <a href="historique.html" class="btn btn-ghost btn-sm">Voir tout</a>
+            </div>
+            <div id="recent-list">
+              <div class="empty-state" style="padding:40px 24px;">
+                <div class="empty-icon">🔬</div>
+                <div class="empty-title">Aucune analyse</div>
+                <div class="empty-subtitle">Les analyses apparaîtront ici après traitement</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── Info panel ──────────────────────────────────── -->
+      <section class="section">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <div class="card-icon" style="background:var(--primary-dim)">📋</div>
+              À propos du système
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="grid-3" style="gap:24px;">
+              <div>
+                <div style="font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:10px;">Méthode</div>
+                <div style="font-size:14px;color:var(--text-secondary);line-height:1.7;">
+                  Chromatographie sur Couche Mince (CCM) pour la détection et l'identification des <strong style="color:var(--text-primary)">alcaloïdes</strong> dans les phytomédicaments.
+                </div>
+              </div>
+              <div>
+                <div style="font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:10px;">Paramètre Rf</div>
+                <div style="font-size:14px;color:var(--text-secondary);line-height:1.7;">
+                  Le facteur de rétention <strong style="color:var(--primary)">Rf = d_spot / d_front</strong>. Valeur comprise entre 0 et 1, caractéristique de chaque composé dans un système de solvant donné.
+                </div>
+              </div>
+              <div>
+                <div style="font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:10px;">Automatisation</div>
+                <div style="font-size:14px;color:var(--text-secondary);line-height:1.7;">
+                  Traitement d'image Python (OpenCV) pour la <strong style="color:var(--text-primary)">détection automatique</strong> des spots, calcul des Rf et identification des alcaloïdes.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /page-content -->
+  </main>
+
+</div><!-- /app-wrapper -->
+
+<style>
+/* Inline quick action styles */
+.quick-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  text-decoration: none;
+  transition: all 0.18s var(--ease);
+  cursor: pointer;
+}
+.quick-action-btn:hover {
+  border-color: var(--border-accent);
+  background: var(--bg-card-hover);
+  transform: translateX(3px);
+}
+.qa-icon {
+  width: 38px; height: 38px;
+  border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.qa-info { flex: 1; min-width: 0; }
+.qa-title { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+.qa-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+/* Recent item */
+.recent-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 24px;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.recent-item:last-child { border-bottom: none; }
+.recent-item:hover { background: var(--bg-elevated); }
+.recent-item-icon {
+  width: 34px; height: 34px;
+  border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  background: var(--primary-dim);
+}
+.recent-item-info { flex: 1; min-width: 0; }
+.recent-item-id {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--primary);
+}
+.recent-item-name {
+  font-size: 13px;
+  color: var(--text-primary);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.recent-item-date {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+</style>
+
+<script src="js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Date header
+  const now = new Date();
+  document.getElementById('header-date').textContent = now.toLocaleDateString('fr-FR', {
+    weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'
+  });
+
+  // Load history stats
+  const history = CCM.getHistory();
+  const totalSpots = history.reduce((s, a) => s + (a.spots?.length || 0), 0);
+  const pending = history.filter(a => a.status === 'pending').length;
+  const reports = history.filter(a => a.exported).length;
+
+  // Animate counters
+  const total   = document.getElementById('stat-total');
+  const spots   = document.getElementById('stat-spots');
+  const pendEl  = document.getElementById('stat-pending');
+  const repEl   = document.getElementById('stat-reports');
+
+  CCM.animateCounter(total,  0, history.length, 900);
+  CCM.animateCounter(spots,  0, totalSpots,     900);
+  CCM.animateCounter(pendEl, 0, pending,         900);
+  CCM.animateCounter(repEl,  0, reports,         900);
+
+  // Nav badge
+  document.getElementById('nav-badge-history').textContent = history.length;
+
+  // Recent analyses list
+  const container = document.getElementById('recent-list');
+  if (history.length > 0) {
+    const items = history.slice(0, 5).map(a => `
+      <a href="resultats.html?id=${a.id}" class="recent-item">
+        <div class="recent-item-icon">🔬</div>
+        <div class="recent-item-info">
+          <div class="recent-item-id">${a.id}</div>
+          <div class="recent-item-name">${a.echantillon || 'Échantillon sans nom'}</div>
+          <div class="recent-item-date">${CCM.formatDateTime(a.date)}</div>
+        </div>
+        <span class="tag ${a.status === 'done' ? 'tag-green' : 'tag-amber'}">
+          ${a.status === 'done' ? 'Validé' : 'En attente'}
+        </span>
+      </a>
+    `).join('');
+    container.innerHTML = items;
+  }
+});
+</script>
+
+</body>
+</html>

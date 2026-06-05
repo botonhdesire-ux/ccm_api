@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nouvelle analyse — CCM Analyser | API-BENIN</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+<div class="app-wrapper">
+
+  <!-- ══ SIDEBAR ══════════════════════════════════════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="index.html" class="logo-mark">
+        <div class="logo-icon">🔬</div>
+        <div>
+          <div class="logo-text">CCM Analyser</div>
+          <div class="logo-sub">API-BENIN</div>
+        </div>
+      </a>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-section-label">Principal</span>
+      <a href="index.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M2 10a8 8 0 1116 0A8 8 0 012 10zm8-3a1 1 0 100 2 1 1 0 000-2zm-1 4a1 1 0 011-1h1a1 1 0 110 2v2a1 1 0 11-2 0v-2a1 1 0 01-1-1z"/></svg>
+        Tableau de bord
+      </a>
+      <a href="analyse.html" class="nav-item active">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 2a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H4zm0 2h12v12H4V4zm3 3a1 1 0 011-1h4a1 1 0 110 2H8a1 1 0 01-1-1zm0 3a1 1 0 011-1h4a1 1 0 110 2H8a1 1 0 01-1-1zm0 3a1 1 0 011-1h2a1 1 0 110 2H8a1 1 0 01-1-1z"/></svg>
+        Nouvelle analyse
+      </a>
+      <a href="resultats.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
+        Résultats & Rf
+      </a>
+      <span class="nav-section-label">Gestion</span>
+      <a href="historique.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/></svg>
+        Historique
+      </a>
+      <a href="rapport.html" class="nav-item">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z"/></svg>
+        Rapports & Export
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-status">
+        <div class="status-dot"></div>
+        <div class="status-text">
+          <span class="status-label">Système actif</span>
+          Moteur prêt
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay"></div>
+
+  <!-- ══ MAIN ═════════════════════════════════════════════ -->
+  <main class="main-content">
+
+    <header class="top-header">
+      <button class="menu-toggle" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <nav class="header-breadcrumb">
+        <a href="index.html" style="color:var(--text-muted);text-decoration:none;">API-BENIN</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-current">Nouvelle analyse</span>
+      </nav>
+      <div class="header-spacer"></div>
+      <div class="header-actions">
+        <button class="theme-toggle" onclick="CCM.toggleTheme()" title="Changer de thème" aria-label="Changer de thème">☀️</button>
+        <div class="header-avatar" title="Opérateur">OP</div>
+      </div>
+    </header>
+
+    <div class="page-content">
+
+      <div class="page-header">
+        <h1 class="page-title">Nouvelle <span>analyse CCM</span></h1>
+        <p class="page-subtitle">Importez une image de plaque CCM et renseignez les paramètres d'analyse</p>
+      </div>
+
+      <!-- ── Steps progress ─────────────────────────────── -->
+      <div class="analysis-steps" id="analysis-steps">
+        <div class="step-item active" data-step="1">
+          <div class="step-node">
+            <div class="step-circle">1</div>
+            <div class="step-text">Paramètres</div>
+          </div>
+        </div>
+        <div class="step-connector" id="conn-1-2"></div>
+        <div class="step-item" data-step="2">
+          <div class="step-node">
+            <div class="step-circle">2</div>
+            <div class="step-text">Import image</div>
+          </div>
+        </div>
+        <div class="step-connector" id="conn-2-3"></div>
+        <div class="step-item" data-step="3">
+          <div class="step-node">
+            <div class="step-circle">3</div>
+            <div class="step-text">Traitement</div>
+          </div>
+        </div>
+        <div class="step-connector" id="conn-3-4"></div>
+        <div class="step-item" data-step="4">
+          <div class="step-node">
+            <div class="step-circle">4</div>
+            <div class="step-text">Résultats</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── STEP 1: Parameters ──────────────────────────── -->
+      <div id="step-panel-1" class="step-panel">
+        <div class="grid-2" style="align-items:start; gap:24px;">
+
+          <!-- Left: Echantillon info -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <div class="card-icon" style="background:var(--primary-dim)">🧪</div>
+                Informations sur l'échantillon
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label class="form-label">Identifiant de l'échantillon <span class="required">*</span></label>
+                <input type="text" id="field-echantillon" class="form-control" placeholder="ex: ECH-2026-001" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Nom du phytomédicament <span class="required">*</span></label>
+                <input type="text" id="field-phyto" class="form-control" placeholder="ex: Extrait de Neem" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Origine / Fabricant</label>
+                <input type="text" id="field-origine" class="form-control" placeholder="ex: Laboratoire X, Djougou" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Numéro de lot</label>
+                <input type="text" id="field-lot" class="form-control" placeholder="ex: LOT-2026-045" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Date d'analyse</label>
+                <input type="date" id="field-date" class="form-control" />
+              </div>
+              <div class="form-group" style="margin-bottom:0">
+                <label class="form-label">Opérateur</label>
+                <input type="text" id="field-operateur" class="form-control" placeholder="ex: Dr. Ahouansou" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: CCM parameters -->
+          <div style="display:flex; flex-direction:column; gap:20px;">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">
+                  <div class="card-icon" style="background:rgba(63,255,162,0.1)">⚗️</div>
+                  Paramètres CCM
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label class="form-label">Système de solvant <span class="required">*</span></label>
+                  <select id="field-solvant" class="form-control">
+                    <option value="">-- Sélectionner --</option>
+                    <option value="BEA">Butanol / Acide acétique / Eau (4:1:5)</option>
+                    <option value="CM">Chloroforme / Méthanol (9:1)</option>
+                    <option value="EA">Éthyl acétate / Ammoniac (9:1)</option>
+                    <option value="CEA">Chloroforme / Éthanol / Ammoniac (8:2:0.2)</option>
+                    <option value="autre">Autre (préciser)</option>
+                  </select>
+                </div>
+                <div class="form-group" id="solvant-autre-group" style="display:none;">
+                  <label class="form-label">Préciser le solvant</label>
+                  <input type="text" id="field-solvant-autre" class="form-control" placeholder="ex: Hexane / Acétate (7:3)" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Révélateur</label>
+                  <select id="field-revelateur" class="form-control">
+                    <option value="dragendorff">Réactif de Dragendorff</option>
+                    <option value="mayer">Réactif de Mayer</option>
+                    <option value="uv254">UV 254 nm</option>
+                    <option value="uv365">UV 365 nm</option>
+                    <option value="kmno4">KMnO₄</option>
+                    <option value="autre">Autre</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Type de plaque</label>
+                  <select id="field-plaque" class="form-control">
+                    <option value="silica60">Silice 60 F254 (aluminium)</option>
+                    <option value="silica60-glass">Silice 60 F254 (verre)</option>
+                    <option value="rp18">RP-18 F254s</option>
+                  </select>
+                </div>
+                <div class="grid-2" style="gap:12px;">
+                  <div class="form-group" style="margin-bottom:0">
+                    <label class="form-label">Nb. dépôts</label>
+                    <input type="number" id="field-depots" class="form-control" value="2" min="1" max="20" />
+                  </div>
+                  <div class="form-group" style="margin-bottom:0">
+                    <label class="form-label">Référence std.</label>
+                    <input type="text" id="field-ref" class="form-control" placeholder="ex: Caféine" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">
+                  <div class="card-icon" style="background:rgba(185,122,255,0.1)">🔧</div>
+                  Options de traitement
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label class="form-label">Méthode de détection</label>
+                  <select id="field-methode" class="form-control">
+                    <option value="auto">Automatique (recommandé)</option>
+                    <option value="threshold">Seuillage adaptatif</option>
+                    <option value="contour">Détection de contours</option>
+                    <option value="hough">Transformation de Hough</option>
+                  </select>
+                </div>
+                <div class="form-group" style="margin-bottom:0">
+                  <label class="form-label">Observations / Notes</label>
+                  <textarea id="field-notes" class="form-control" placeholder="Conditions particulières, observations préliminaires..."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btn-primary btn-lg" id="btn-next-step1" style="width:100%;justify-content:center;">
+              Continuer vers l'import d'image →
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── STEP 2: Image Import ────────────────────────── -->
+      <div id="step-panel-2" class="step-panel" style="display:none;">
+        <div class="grid-2" style="align-items:start; gap:24px;">
+
+          <!-- Upload zone -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <div class="card-icon" style="background:var(--primary-dim)">📷</div>
+                Import de l'image
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="upload-zone" id="upload-zone">
+                <span class="upload-icon">🖼️</span>
+                <div class="upload-title">Glissez-déposez l'image ici</div>
+                <div class="upload-subtitle">ou cliquez pour parcourir</div>
+                <div class="upload-formats">
+                  <span class="format-chip">PNG</span>
+                  <span class="format-chip">JPG / JPEG</span>
+                  <span class="format-chip">TIFF</span>
+                  <span class="format-chip">BMP</span>
+                </div>
+                <input type="file" id="file-input" accept="image/*" style="display:none;" />
+              </div>
+
+              <!-- Preview (hidden initially) -->
+              <div id="image-preview-wrap" style="display:none; margin-top:16px;">
+                <div class="upload-preview">
+                  <img id="preview-img" src="" alt="Prévisualisation plaque CCM" />
+                  <div class="upload-preview-actions">
+                    <button class="btn btn-secondary btn-sm" id="btn-change-img">Changer</button>
+                  </div>
+                </div>
+                <div class="params-panel" style="margin-top:14px;">
+                  <div class="params-title">Informations fichier</div>
+                  <div class="param-row">
+                    <span class="param-key">Nom du fichier</span>
+                    <span class="param-val" id="info-filename">—</span>
+                  </div>
+                  <div class="param-row">
+                    <span class="param-key">Taille</span>
+                    <span class="param-val" id="info-size">—</span>
+                  </div>
+                  <div class="param-row">
+                    <span class="param-key">Dimensions</span>
+                    <span class="param-val" id="info-dims">—</span>
+                  </div>
+                  <div class="param-row">
+                    <span class="param-key">Type</span>
+                    <span class="param-val" id="info-type">—</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: calibration hints -->
+          <div style="display:flex; flex-direction:column; gap:20px;">
+            <div class="info-box info">
+              <span class="info-box-icon">💡</span>
+              <div>
+                <strong>Conseils pour une bonne image</strong><br/>
+                Photographiez la plaque à plat, avec un éclairage uniforme. Évitez les reflets et ombres. La résolution minimale recommandée est de <strong>300 dpi</strong>.
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">
+                  <div class="card-icon" style="background:rgba(255,184,79,0.1)">📐</div>
+                  Calibration manuelle
+                </div>
+              </div>
+              <div class="card-body">
+                <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">
+                  Si la détection automatique des lignes de référence échoue, renseignez les positions manuellement (en mL de la hauteur de l'image, 0 = haut).
+                </p>
+                <div class="form-group">
+                  <label class="form-label">Front du solvant (mL) <span class="required">*</span></label>
+                  <input type="number" id="field-front-y" class="form-control" value="5" min="0" max="99" />
+                </div>
+                <div class="form-group" style="margin-bottom:0">
+                  <label class="form-label">Ligne de dépôt (mL) <span class="required">*</span></label>
+                  <input type="number" id="field-depot-y" class="form-control" value="92" min="1" max="100" />
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">
+                  <div class="card-icon" style="background:rgba(63,255,162,0.1)">📋</div>
+                  Récapitulatif
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="params-panel" style="background:transparent;border:none;padding:0;">
+                  <div class="params-title">Paramètres saisis</div>
+                  <div class="param-row">
+                    <span class="param-key">Échantillon</span>
+                    <span class="param-val" id="recap-echantillon">—</span>
+                  </div>
+                  <div class="param-row">
+                    <span class="param-key">Solvant</span>
+                    <span class="param-val" id="recap-solvant">—</span>
+                  </div>
+                  <div class="param-row">
+                    <span class="param-key">Révélateur</span>
+                    <span class="param-val" id="recap-revelateur">—</span>
+                  </div>
+                  <div class="param-row">
+                    <span class="param-key">Méthode</span>
+                    <span class="param-val" id="recap-methode">—</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:10px;">
+              <button class="btn btn-ghost" id="btn-back-step2" style="flex:1;justify-content:center;">← Retour</button>
+              <button class="btn btn-primary" id="btn-launch-analysis" style="flex:2;justify-content:center;" disabled>
+                🚀 Lancer l'analyse
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── STEP 3: Processing ──────────────────────────── -->
+      <div id="step-panel-3" class="step-panel" style="display:none;">
+        <div class="card" style="max-width:640px; margin:0 auto;">
+          <div class="card-body" style="padding:60px 40px; text-align:center;">
+            <div style="width:72px;height:72px;margin:0 auto 24px;border:4px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+            <h2 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--text-primary);margin-bottom:8px;">
+              Analyse en cours…
+            </h2>
+            <p style="color:var(--text-secondary);font-size:14px;margin-bottom:28px;" id="processing-label">
+              Initialisation du moteur de traitement d'image
+            </p>
+            <div class="progress-bar" style="max-width:400px;margin:0 auto 16px;">
+              <div class="progress-fill" id="processing-bar" style="width:0%"></div>
+            </div>
+            <div style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);" id="processing-step">
+              Étape 0/5
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /page-content -->
+  </main>
+
+</div><!-- /app-wrapper -->
+
+<script src="js/main.js"></script>
+<script src="js/analyse.js"></script>
+</body>
+</html>
